@@ -26,8 +26,6 @@ export default class Montecarlo {
                 amount = amount + this.betAmount * (result == this.bet ? 1 : -1)
                 
                 amountPlot.push(amount)
-
-                console.log(amount)
             }
 
             plotData.push({name: `Simulacion ${i}`, data: amountPlot})
@@ -37,6 +35,18 @@ export default class Montecarlo {
 
         const average = results.reduce((a, b) => a + b, 0) / results.length
 
-        return { average: average, data: plotData}
+        return { average: average, data: plotData, results }
+    }
+
+    gameEdge(){
+        let win_probability = 18/37;
+        let loss_probability = 1 - win_probability;
+        let payoff_win = 1;
+
+        let expected_value = (payoff_win * win_probability) - (1 * loss_probability);
+        let house_edge = -expected_value * 100;
+        house_edge = house_edge.toFixed(2);
+
+        return house_edge;
     }
 }

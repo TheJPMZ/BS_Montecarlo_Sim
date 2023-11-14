@@ -17,6 +17,7 @@ export default function App() {
   const [bet, setBet] = useState(1)
   const [numBet, setNumBet] = useState(15)
   const [simulations, setSimulations] = useState(1)
+  const [gameEdge, setGameEdge] = useState(0)
 
   const [series, setSeries] = useState([{ name: "", data: [0] }])
   const [options, setOptions] = useState({})
@@ -32,6 +33,7 @@ export default function App() {
     const montevideo = new Montecarlo(initial, 'red', bet, numBet, simulations)
 
     const { average, data } = montevideo.simulate()
+    setGameEdge(montevideo.gameEdge())
 
     setFinal(average)
 
@@ -97,10 +99,14 @@ export default function App() {
         <div className='bg-a3 h-full w-full'>
           {ready ?
             <>
-              <div className='grid grid-cols-2 p-10'>
+              <div className='grid grid-cols-3 p-10'>
                 <div className='bg-green-200 h-20 rounded-l-full'>
                   <h3 className='text-green-700 pl-9 font-semibold'>Initial Amount:</h3>
                   <h4 className='pl-9 font-bold text-5xl'>${initial}</h4>
+                </div>
+                <div className='bg-blue-200 h-20'>
+                  <h3 className='text-blue-700 pl-9 font-semibold'>Game Edge:</h3>
+                  <h4 className='pl-9 font-bold text-5xl'>{gameEdge}%</h4>
                 </div>
                 <div className='bg-red-300 h-20 rounded-r-full'>
                   <h3 className='text-red-700 pl-2 font-semibold'>Final Amount:</h3>
