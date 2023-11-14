@@ -33,7 +33,11 @@ export default function App() {
     const montevideo = new Montecarlo(initial, 'red', bet, numBet, simulations)
 
     const { average, data } = montevideo.simulate()
+
     setGameEdge(montevideo.gameEdge())
+    //console.log(average)
+    //montevideo.getMinMaxValues()
+    montevideo.Validacion()
 
     setFinal(average)
 
